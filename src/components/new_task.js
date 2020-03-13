@@ -21,7 +21,7 @@ export function NewTask() {
     const classes = useStyles();
     return (
         <Paper>
-            <Formik initialValues={{task: '', description: ''}}
+            <Formik initialValues={{name: '', description: ''}}
                     onSubmit={((values, {resetForm, setSubmitting}) => {
                         setSubmitting(false);
                         resetForm();
@@ -30,7 +30,7 @@ export function NewTask() {
                 {({submitForm, isSubmitting}) => (
                     <Form className={classes.root}>
                         <Field component={TextField}
-                               name={'task'}
+                               name='name'
                                label="New Task"
                                fullWidth
                                className={classes.field}
