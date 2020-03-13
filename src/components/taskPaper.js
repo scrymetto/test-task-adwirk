@@ -18,17 +18,24 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export function TaskPaper({task}) {
+export function TaskPaper({task, onMove}) {
     const classes = useStyles();
-    const [{isDragging}, drag] = useDrag({
-        item: {type: ItemTypes.TASK},
-        collect: monitor => ({
-            isDragging: !!monitor.isDragging()
-        })
+    const [collectedProps, drag] = useDrag({
+        item: {id: task.id,
+            type: ItemTypes.TASK},
+        collect: monitor => {
+            return {
+                isDragging: !!monitor.isDragging()
+            }
+        },
+        end({id}, monitor) {
+            const {key} = monitor.getDropResult();
+            onMove(id, key)
+        }
     });
 
     return (
-        <Card className={classes.root} ref={drag} style={{opacity: isDragging? 0.5 : 1}}>
+        <Card className={classes.root} ref={drag} style={{opacity: collectedProps.isDragging ? 0.5 : 1}}>
             <CardContent>
                 <Typography color="textSecondary" className={classes.title}>Your task</Typography>
                 <Typography variant="h5" className={classes.text}>{task.name}</Typography>
