@@ -1,15 +1,20 @@
 import React, {useState} from 'react';
 import {Grid} from "@material-ui/core";
 import {Tasks} from "./tasks";
-import {LISTS, MAX_GRID} from "../CONSTS";
+import {LISTS, LOCAL_STORAGE_KEY, MAX_GRID} from "../CONSTS";
 import {createTasksObj} from "../helpers/createTasksObj";
+import {useLocalStorage} from "../helpers/useLocalStorage";
 
 export function Lists() {
 
-    const [tasks, setTasks] = useState(createTasksObj(LISTS));
+    const [storageData, setStorageData] = useLocalStorage(LOCAL_STORAGE_KEY);
 
-    const changeTasks = (task) => {
-        setTasks({...tasks, ...task})
+    const [tasks, setTasks] = useState(storageData ? JSON.parse(storageData) : createTasksObj(LISTS));
+
+    const changeTasks = (changedTask) => {
+        const newTasks =  {...tasks, ...changedTask};
+        setTasks(newTasks);
+        setStorageData(JSON.stringify(newTasks));
     };
 
 
