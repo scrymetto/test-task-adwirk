@@ -18,3 +18,5 @@ export const LISTS = [
         name: 'Done'
     }
 ];
+
+export const LOCAL_STORAGE_KEY = 'tasks';
