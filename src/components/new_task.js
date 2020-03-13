@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export function NewTask() {
+export function NewTask({addNewTask}) {
     const classes = useStyles();
     return (
         <Paper>
@@ -25,7 +25,7 @@ export function NewTask() {
                     onSubmit={((values, {resetForm, setSubmitting}) => {
                         setSubmitting(false);
                         resetForm();
-                        setTimeout(() => console.log(values), 500)
+                        addNewTask(values)
                     })}>
                 {({submitForm, isSubmitting}) => (
                     <Form className={classes.root}>
