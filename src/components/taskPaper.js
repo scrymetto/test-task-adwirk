@@ -21,16 +21,20 @@ const useStyles = makeStyles(theme => ({
 export function TaskPaper({task, onMove}) {
     const classes = useStyles();
     const [collectedProps, drag] = useDrag({
-        item: {id: task.id,
-            type: ItemTypes.TASK},
+        item: {
+            id: task.id,
+            type: ItemTypes.TASK
+        },
         collect: monitor => {
             return {
                 isDragging: !!monitor.isDragging()
             }
         },
         end({id}, monitor) {
-            const {key} = monitor.getDropResult();
-            onMove(id, key)
+            const result = monitor.getDropResult();
+            if (result) {
+                onMove(id, result.key)
+            }
         }
     });
 

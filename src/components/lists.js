@@ -17,8 +17,22 @@ export function Lists() {
 
     const [tasks, setTasks] = useState(storageData ? JSON.parse(storageData) : createTasksObj(LISTS));
 
-    const changeTasks = (changedTask) => {
-        const newTasks = {...tasks, ...changedTask};
+    const removeTask = (id, taskKey) => {
+        const newObj = {};
+        newObj[taskKey] = tasks[taskKey].filter(task => task.id !== id);
+        console.log(newObj)
+        const newTasks = {...tasks, ...newObj};
+        console.log(newTasks)
+        setTasks(newTasks);
+        setStorageData(JSON.stringify(newTasks));
+    };
+
+    const addTask = (newTask, target) => {
+        console.log(newTask)
+        const newObj = {};
+        newObj[target] = tasks[target].concat([newTask]);
+        const newTasks = {...tasks, ...newObj};
+        console.log(newTasks)
         setTasks(newTasks);
         setStorageData(JSON.stringify(newTasks));
     };
@@ -34,7 +48,8 @@ export function Lists() {
                                 <Grid key={list.key} item md={MAX_GRID / LISTS.length} sm={MAX_GRID / LISTS.length * 2}
                                       xs={MAX_GRID}>
                                     <Tasks list={list} tasks={tasks[list.key]}
-                                           setTask={(task) => changeTasks(task, list.key)}/>
+                                           removeTask={removeTask}
+                                           addTask={addTask}/>
                                 </Grid>
                             )
                         })}
