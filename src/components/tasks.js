@@ -10,7 +10,7 @@ import {useDrop} from "react-dnd";
 import {ItemTypes} from "../CONSTS";
 
 export function Tasks(props) {
-    const {list, tasks, addTask, removeTask} = props;
+    const {list, tasks, changeTasks} = props;
 
     const [, drop] = useDrop({
         accept: ItemTypes.TASK,
@@ -20,14 +20,13 @@ export function Tasks(props) {
     const addNewTask = task => {
         if (task.name) {
             task.id = uuid();
-            addTask(task, list.key)
+            changeTasks(list.key, task)
         }
     };
 
     const onMoveTask = (source, taskId, target) => {
         const task = tasks.filter(task => task.id === taskId)[0];
-        addTask(task, target);
-        removeTask(taskId, source);
+        changeTasks(source, task, target);
     };
 
     return (

@@ -17,26 +17,19 @@ export function Lists() {
 
     const [tasks, setTasks] = useState(storageData ? JSON.parse(storageData) : createTasksObj(LISTS));
 
-    const removeTask = (id, taskKey) => {
-        const newObj = {};
-        newObj[taskKey] = tasks[taskKey].filter(task => task.id !== id);
-        console.log(newObj)
-        const newTasks = {...tasks, ...newObj};
-        console.log(newTasks)
+    const changeTasks = (source, task, target) => {
+        if (source === target) return;
+        const changes = {};
+        if (target) {
+            changes[source] = tasks[source].filter(oldTask => oldTask.id !== task.id);
+            changes[target] = [...tasks[target], task]
+        } else {
+            changes[source] = [...tasks[source], task]
+        }
+        const newTasks = {...tasks, ...changes};
         setTasks(newTasks);
         setStorageData(JSON.stringify(newTasks));
     };
-
-    const addTask = (newTask, target) => {
-        console.log(newTask)
-        const newObj = {};
-        newObj[target] = tasks[target].concat([newTask]);
-        const newTasks = {...tasks, ...newObj};
-        console.log(newTasks)
-        setTasks(newTasks);
-        setStorageData(JSON.stringify(newTasks));
-    };
-
 
     return (
         <DndProvider backend={Backend}>
@@ -48,8 +41,8 @@ export function Lists() {
                                 <Grid key={list.key} item md={MAX_GRID / LISTS.length} sm={MAX_GRID / LISTS.length * 2}
                                       xs={MAX_GRID}>
                                     <Tasks list={list} tasks={tasks[list.key]}
-                                           removeTask={removeTask}
-                                           addTask={addTask}/>
+                                           changeTasks={changeTasks}
+                                    />
                                 </Grid>
                             )
                         })}
