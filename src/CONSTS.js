@@ -20,3 +20,7 @@ export const LISTS = [
 ];
 
 export const LOCAL_STORAGE_KEY = 'tasks';
+
+export const ItemTypes = {
+  TASK: 'task'
+};

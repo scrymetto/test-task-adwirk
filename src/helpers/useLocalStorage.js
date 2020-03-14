@@ -5,7 +5,6 @@ export const useLocalStorage = key => {
       localStorage.getItem(key)||''
   );
   useEffect(()=>{
-      console.log(storageData)
       localStorage.setItem(key, storageData);
   }, [storageData]);
   return [storageData, setStorageData]
