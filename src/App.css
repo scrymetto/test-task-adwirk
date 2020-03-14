@@ -2,3 +2,12 @@ html, body, .App {
     min-width: 200px;
     width: 100%;
 }
+
+html, body, .App, #root {
+    height: 100%;
+}
+
+.lists_container {
+    margin: 10px;
+    height: calc(100% - 64px - 20px) /*parent_height  - (header_height + margin*2)*/
+}

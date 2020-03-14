@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
-import {Grid} from "@material-ui/core";
+import {Grid, makeStyles} from "@material-ui/core";
 import {DndProvider} from 'react-dnd';
 import Backend from 'react-dnd-html5-backend';
 
@@ -11,7 +11,30 @@ import {LISTS, LOCAL_STORAGE_KEY, MAX_GRID} from "../CONSTS";
 import {createTasksObj} from "../helpers/createTasksObj";
 import {useLocalStorage} from "../helpers/useLocalStorage";
 
+const useStyles = makeStyles(theme => ({
+    root: {
+        height: '100%'
+    },
+}));
+
 export function Lists() {
+
+    const [fullScreen, changeFull] = useState(false);
+
+    const classes = useStyles();
+
+    useEffect(() => {
+        const listener = () => {
+            if (window.innerWidth > 960) {
+                changeFull(true);
+            }
+        };
+        window.addEventListener('resize', listener);
+        return () => {
+            window.removeEventListener('resize', listener)
+        }
+    }, []);
+
 
     const [storageData, setStorageData] = useLocalStorage(LOCAL_STORAGE_KEY);
 
@@ -33,14 +56,16 @@ export function Lists() {
 
     return (
         <DndProvider backend={Backend}>
-            <div style={{'margin': '10px'}}>
-                <Grid container justify="center" alignItems='center'>
-                    <Grid container direction='row' spacing={2}>
+            <div className='lists_container'>
+                <Grid container justify="center" alignItems='flex-start' className={classes.root}>
+                    <Grid container direction='row' spacing={2} className={classes.root}>
                         {LISTS.map(list => {
                             return (
-                                <Grid key={list.key} item md={MAX_GRID / LISTS.length} sm={MAX_GRID / LISTS.length * 2}
+                                <Grid key={list.key} item
+                                      md={MAX_GRID / LISTS.length} sm={MAX_GRID / LISTS.length * 2}
                                       xs={MAX_GRID}>
                                     <Tasks list={list} tasks={tasks[list.key]}
+                                           className={fullScreen ? classes.root : ''}
                                            changeTasks={changeTasks}
                                     />
                                 </Grid>

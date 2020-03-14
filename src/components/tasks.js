@@ -2,14 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {v1 as uuid} from 'uuid';
 
-import {Grid} from "@material-ui/core";
+import {Grid, makeStyles} from "@material-ui/core";
 import {PaperHeader} from "./paper_header";
 import {NewTask} from "./new_task";
 import {TaskPaper} from "./taskPaper";
 import {useDrop} from "react-dnd";
 import {ItemTypes} from "../CONSTS";
 
+const useStyles = makeStyles(theme => ({
+    root: {
+        height: '100%'
+    },
+}));
+
 export function Tasks(props) {
+    const classes = useStyles();
     const {list, tasks, changeTasks} = props;
 
     const [, drop] = useDrop({
@@ -30,7 +37,7 @@ export function Tasks(props) {
     };
 
     return (
-        <Grid container direction={"column"} ref={drop}>
+        <Grid container direction={"column"} ref={drop} className={classes.root}>
             <Grid item>
                 <PaperHeader>
                     {list.name}
