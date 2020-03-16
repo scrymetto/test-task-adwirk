@@ -5,17 +5,23 @@ const useStyles = makeStyles(theme => ({
     root: {
         position: 'relative'
     },
+    title: {
+        flexGrow: 1,
+    }
 }));
 
-export function Header() {
+export function Header(props) {
     const classes = useStyles();
+    const button = props.children;
+
     return (
         <>
-                <AppBar className={classes.root}>
-                    <Toolbar>
-                        <Typography variant='h6'>Test app for Adwirk Group</Typography>
-                    </Toolbar>
-                </AppBar>
+            <AppBar className={classes.root}>
+                <Toolbar>
+                    <Typography variant='h6' className={classes.title}>Test app for Adwirk Group</Typography>
+                    {button && button()}
+                </Toolbar>
+            </AppBar>
         </>
     )
 }

@@ -1,9 +1,20 @@
 {
-  "short_name": "Adwirk",
-  "name": "Test task",
-  "icons": [],
+  "short_name": "Test",
+  "name": "Test task for Adwirk",
+  "icons": [
+    {
+      "src": "brain192.png",
+    "type": "image/png",
+    "sizes": "192x192"
+    },
+    {
+      "src": "brain512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#3f51b5",
+  "background_color": "#3f51b5"
 }
