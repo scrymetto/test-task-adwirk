@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {v1 as uuid} from 'uuid';
+import uuid from 'react-uuid';
 
 import {Grid, makeStyles} from "@material-ui/core";
 import {PaperHeader} from "./paper_header";
