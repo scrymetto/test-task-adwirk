@@ -16,7 +16,7 @@ export function Header(props) {
 
     return (
         <>
-            <AppBar className={classes.root}>
+            <AppBar className={classes.root} data-testid='AppBar'>
                 <Toolbar>
                     <Typography variant='h6' className={classes.title}>Test app for Adwirk Group</Typography>
                     {button && button()}

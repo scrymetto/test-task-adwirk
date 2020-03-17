@@ -47,11 +47,12 @@ export function NewTask({addNewTask}) {
                                size='small'
                         />
                         <Button
-                                color="primary"
-                                type='submit'
-                                onClick={submitForm}
-                                disabled={isSubmitting}
-                                className={classes.button}>
+                            data-testid='button'
+                            color="primary"
+                            type='submit'
+                            onClick={submitForm}
+                            disabled={isSubmitting}
+                            className={classes.button}>
                             Add new task
                         </Button>
                     </Form>

@@ -6,7 +6,7 @@ import {Header} from "./components/header";
 import {Lists} from "./components/lists";
 import {Tooltip} from "./components/tooltip";
 
-import {APP_IS_OFFLINE_TOOLTIP_TEXT, INSTALL_BUTTON_TOOLTIP_TEXT} from "./CONSTS";
+import {INSTALL_BUTTON_TOOLTIP_TEXT} from "./CONSTS";
 
 import './App.css';
 
@@ -46,16 +46,6 @@ function App() {
         showButton(false)
     };
 
-    if (!navigator.onLine) {
-        showTooltip(true);
-        changeTextForTooltip(APP_IS_OFFLINE_TOOLTIP_TEXT)
-    }
-
-    // const installApp = () => {
-    //     showTooltip(true);
-    //     changeTextForTooltip(INSTALL_BUTTON_TOOLTIP_TEXT)
-    // };
-
     const onTooltipClose = () => {
         showTooltip(false);
         changeTextForTooltip('')
@@ -63,10 +53,10 @@ function App() {
 
     const installButton = () => <Button variant="contained" color="secondary" onClick={installApp}>Install</Button>;
     return (
-        <div className="App">
+        <div className="App" data-testid='App'>
             <Header children={button && installButton}/>
             <Lists/>
-            {tooltip && <Tooltip text={textForTooltip} onClose={onTooltipClose}/>}
+            {tooltip && <Tooltip text={textForTooltip} onClose={onTooltipClose} data-testid='Tooltip'/>}
         </div>
     );
 }
