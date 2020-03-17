@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import uuid from 'react-uuid';
+import {useDrop} from "react-dnd";
 
 import {Grid, makeStyles} from "@material-ui/core";
 import {PaperHeader} from "./paper_header";
+
 import {NewTask} from "./new_task";
 import {TaskPaper} from "./taskPaper";
-import {useDrop} from "react-dnd";
 import {ItemTypes} from "../CONSTS";
 
 const useStyles = makeStyles(theme => ({

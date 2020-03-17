@@ -14,7 +14,7 @@ export function Tooltip({text, onClose}) {
     };
 
     return (
-        <div>
+        <div className='tooltip'>
             <Snackbar
                 anchorOrigin={{
                     vertical: 'bottom',

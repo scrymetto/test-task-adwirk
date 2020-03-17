@@ -56,7 +56,7 @@ export function Lists() {
 
     return (
         <DndProvider backend={Backend}>
-            <div className='lists_container'>
+            <div className='lists_container' data-testid='Lists'>
                 <Grid container justify="center" alignItems='flex-start' className={classes.root}>
                     <Grid container direction='row' spacing={2} className={classes.root}>
                         {LISTS.map(list => {
